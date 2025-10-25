@@ -30,15 +30,31 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-    const response = await api.post('/auth/login', { email, password });
-    const { token: newToken, user: userData } = response.data;
-    
-    localStorage.setItem('token', newToken);
-    setToken(newToken);
-    setUser(userData);
-    api.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
-    
-    return userData;
+    try {
+      console.log('Attempting login with:', { email });
+      const response = await api.post('/auth/login', { email, password });
+      console.log('Login response:', response.data);
+      
+      const { token: newToken, user: userData } = response.data;
+      
+      if (!newToken || !userData) {
+        console.error('Invalid response format:', response.data);
+        throw new Error('Invalid response from server');
+      }
+      
+      localStorage.setItem('token', newToken);
+      setToken(newToken);
+      setUser(userData);
+      api.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
+      
+      return userData;
+    } catch (error) {
+      console.error('Login error:', error);
+      if (error.response) {
+        console.error('Error response:', error.response.data);
+      }
+      throw error;
+    }
   };
 
   const register = async (name, email, password) => {
