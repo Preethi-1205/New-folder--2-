@@ -6,7 +6,7 @@ services:
     container_name: student_portal_db
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres123
+      POSTGRES_PASSWORD: Giri1205@
       POSTGRES_DB: student_portal
     ports:
       - "5432:5432"
@@ -31,7 +31,7 @@ services:
       DB_PORT: 5432
       DB_NAME: student_portal
       DB_USER: postgres
-      DB_PASSWORD: postgres123
+      DB_PASSWORD: Giri1205@
       JWT_SECRET: your-super-secret-jwt-key-change-in-production
       JWT_EXPIRE: 7d
     ports:
