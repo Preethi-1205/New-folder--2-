@@ -20,7 +20,8 @@ const auth = async (req, res, next) => {
       return res.status(401).json({ error: 'User not found' });
     }
 
-    req.user = result.rows;
+    // store single user object (not array) on req.user
+    req.user = result.rows[0];
     req.userId = decoded.userId;
     next();
   } catch (error) {

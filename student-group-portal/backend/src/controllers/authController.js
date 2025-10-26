@@ -70,8 +70,22 @@ exports.login = async (req, res, next) => {
 
 exports.getProfile = async (req, res, next) => {
   try {
-    const user = await User.findById(req.userId);
-    res.json({ user });
+    const userRows = await User.findById(req.userId);
+    const user = Array.isArray(userRows) ? userRows[0] : userRows;
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Return same shape as login response (id, name, email, role)
+    res.json({
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      }
+    });
   } catch (error) {
     next(error);
   }

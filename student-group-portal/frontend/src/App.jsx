@@ -31,10 +31,10 @@ function App() {
             <Route path="assignments" element={<AssignmentList />} />
             <Route path="submissions" element={<SubmissionTracker />} />
             
-            <Route path="admin/dashboard" element={<ProtectedRoute adminOnly><AdminDashboard /></ProtectedRoute>} />
-            <Route path="admin/assignments" element={<ProtectedRoute adminOnly><AssignmentManager /></ProtectedRoute>} />
-            <Route path="admin/analytics" element={<ProtectedRoute adminOnly><Analytics /></ProtectedRoute>} />
-            <Route path="admin/groups" element={<ProtectedRoute adminOnly><GroupTracker /></ProtectedRoute>} />
+            <Route path="admin/dashboard" element={<ProtectedRoute adminOnly={true}><AdminDashboard /></ProtectedRoute>} />
+            <Route path="admin/assignments" element={<ProtectedRoute adminOnly={true}><AssignmentManager /></ProtectedRoute>} />
+            <Route path="admin/analytics" element={<ProtectedRoute adminOnly={true}><Analytics /></ProtectedRoute>} />
+            <Route path="admin/groups" element={<ProtectedRoute adminOnly={true}><GroupTracker /></ProtectedRoute>} />
           </Route>
         </Routes>
       </Router>
